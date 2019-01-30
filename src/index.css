@@ -3,20 +3,6 @@ body {
   margin: 20px;
 }
 
-ol, ul {
-  padding-left: 30px;
-}
-
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
-}
-
-.status {
-  margin-bottom: 10px;
-}
-
 .square {
   background: #fff;
   border: 1px solid #999;
@@ -29,23 +15,7 @@ ol, ul {
   padding: 0;
   text-align: center;
   width: 34px;
-}
-
-.square:focus {
-  outline: none;
-}
-
-.kbd-navigation .square:focus {
-  background: #ddd;
-}
-
-.game {
-  display: flex;
-  flex-direction: row;
-}
-
-.game-info {
-  margin-left: 20px;
+  margin-left: 5px;
 }
 
 .queues {
@@ -58,19 +28,17 @@ ol, ul {
   width: 40%;
 }
 
-.horizontal-queues{
-  float: left;
-  border: 1px solid red;
-  padding: 2px;
-
-}
-
-button{
+.button1{
   display: flex;
   margin-left: 25px;
   margin-right: 25px;
   margin-top: 25px;
  }
+
+.button2{
+  display: flex;
+  float: left;
+}
 
 .vertical{
   float: left;
