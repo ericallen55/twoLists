@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Top extends React.Component{
+class Top extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -54,30 +54,38 @@ class Top extends React.Component{
     };
 
     render() {
-        return(
-            <div className="center-queues">
-                <div className="queues" >
-                    <List
-                        items = {this.state.leftList}
-                    />
-                </div>
+        return (
+            <div>
                 <div className="vertical">
-                    <button className="button1" onClick={this.leftClick}>-></button>
-                    <button className="button1" onClick={this.rightClick}>&lt;-</button>
-                </div>
-                <div className="queues">
-                    <List
-                        items = {this.state.rightList}
-                    />
+                    <h5>Takes the top item and puts it on the bottom</h5>
+                    <div>
+                        <div className="queues">
+                            <List
+                                items={this.state.leftList}
+                            />
+                        </div>
+                        <div className="vertical">
+                            <button className="button1" onClick={this.leftClick}>-></button>
+                            <button className="button1" onClick={this.rightClick}>&lt;-</button>
+                        </div>
+                        <div className="queues">
+                            <List
+                                items={this.state.rightList}
+                            />
+                        </div>
+                    </div>
                 </div>
 
-                <div className="queues">
-                    <List2
-                        leftList = {this.state.leftList2}
-                        rightList = {this.state.rightList2}
-                        leftClick={this.leftClick2}
-                        rightClick={this.rightClick2}
-                    />
+                <div className="vertical">
+                    <h5>Places the one selected at the bottom of other list</h5>
+                    <div className="queues">
+                        <List2
+                            leftList={this.state.leftList2}
+                            rightList={this.state.rightList2}
+                            leftClick={this.leftClick2}
+                            rightClick={this.rightClick2}
+                        />
+                    </div>
                 </div>
             </div>
         )
@@ -112,13 +120,21 @@ class List2 extends React.Component {
         this.props.rightClick(i);
     };
 
-    createItem = (i) => {
+    createLeft = (i) => {
         return (
-            <div>
+            <div className="vertical">
                 <div className="square vertical">
                     {this.props.leftList[i]}
                 </div>
                 <button className="button2" onClick={() => this.leftClick(i)}>-></button>
+            </div>
+
+        )
+    };
+
+    createRight = (i) => {
+        return (
+            <div className="vertical">
                 <button className="button2" onClick={() => this.rightClick(i)}>&lt;-</button>
                 <div className="square vertical">
                     {this.props.rightList[i]}
@@ -126,18 +142,26 @@ class List2 extends React.Component {
             </div>
         )
     };
-    calcMaxLength = () => {
-        return this.props.leftList.length > this.props.rightList.length ? this.props.leftList.length : this.props.rightList.length
-    };
 
     render() {
-
-        let items = [];
-        for (let i = 0; i < this.state.length; i++) {
-            items.push(this.createItem(i))
+        let left = [];
+        let right = [];
+        for (let i = 0; i < this.props.leftList.length; i++) {
+            left.push(this.createLeft(i))
         }
+        for (let i = 0; i < this.props.rightList.length; i++) {
+            right.push(this.createRight(i))
+        }
+
         return (
-            items
+            <div>
+                <div className="grid">
+                    {left}
+                </div>
+                <div className="grid">
+                    {right}
+                </div>
+            </div>
         )
     }
 }
@@ -149,8 +173,8 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-function  initializeList(startValue, size) {
-    return Array.apply(null, {length: size}).map(function(value, index){
+function initializeList(startValue, size) {
+    return Array.apply(null, {length: size}).map(function (value, index) {
         return index + 1 + startValue;
     });
 }
